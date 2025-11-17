@@ -1,0 +1,204 @@
+/* Search with Filters */
+.search-with-filters {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-bar {
+    display: flex;
+    gap: var(--spacing-3);
+    align-items: center;
+}
+
+.search-input-container {
+    flex: 1;
+    display: flex;
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.search-input-container:focus-within {
+    border-color: var(--primary-500);
+    box-shadow: var(--shadow);
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    padding: var(--spacing-3) var(--spacing-4);
+    background: transparent;
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.search-btn {
+    padding: var(--spacing-3);
+    background: var(--primary-500);
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.search-btn:hover {
+    background: var(--primary-600);
+}
+
+.filters-btn {
+    padding: var(--spacing-3);
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+}
+
+.filters-btn:hover {
+    border-color: var(--primary-500);
+    background: var(--primary-500);
+    color: var(--white);
+}
+
+/* Filters Popup */
+.filters-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+}
+
+.filters-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg-card);
+    border-radius: var(--border-radius-xl);
+    padding: var(--spacing-4);
+    box-shadow: var(--shadow-2xl);
+    z-index: 1001;
+    width: 90%;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-4);
+    padding-bottom: var(--spacing-3);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.filters-header h3 {
+    color: var(--text-primary);
+    font-size: var(--font-size-lg);
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: var(--font-size-2xl);
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: var(--spacing-1);
+    transition: var(--transition);
+}
+
+.close-btn:hover {
+    color: var(--error-500);
+    transform: scale(1.1);
+}
+
+.filters-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-4);
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+}
+
+.filter-group select,
+.filter-group input {
+    padding: var(--spacing-3);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    transition: var(--transition);
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+.filters-actions {
+    display: flex;
+    gap: var(--spacing-3);
+    justify-content: flex-end;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .search-bar {
+        gap: var(--spacing-2);
+    }
+
+    .filters-popup {
+        width: 95%;
+        padding: var(--spacing-3);
+    }
+
+    .filters-actions {
+        flex-direction: column;
+    }
+
+    .filters-actions .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-input {
+        padding: var(--spacing-2) var(--spacing-3);
+        font-size: var(--font-size-sm);
+    }
+
+    .search-btn,
+    .filters-btn {
+        padding: var(--spacing-2);
+    }
+}

@@ -1,0 +1,229 @@
+/* Footer - Estilos para Ícones Lucide */
+.footer {
+    background: var(--gray-900);
+    color: var(--gray-300);
+    padding: var(--spacing-8) 0 var(--spacing-4);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--spacing-8);
+    margin-bottom: var(--spacing-6);
+}
+
+.footer-section h3 {
+    color: white;
+    margin-bottom: var(--spacing-3);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-3);
+}
+
+.logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    border-radius: 50%;
+    color: white;
+}
+
+.logo-icon svg {
+    color: white;
+}
+
+.logo-text {
+    font-size: var(--font-size-xl);
+    font-weight: 900;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-description {
+    line-height: 1.6;
+    margin-bottom: var(--spacing-4);
+    color: var(--gray-400);
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: var(--spacing-3);
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--gray-700);
+    border-radius: 50%;
+    color: var(--gray-300);
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.social-links svg {
+    color: currentColor;
+}
+
+/* Footer Links */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: var(--spacing-2);
+}
+
+.footer-links a {
+    color: var(--gray-400);
+    text-decoration: none;
+    transition: var(--transition);
+    display: block;
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+    transform: translateX(4px);
+}
+
+/* Footer Contact */
+.footer-contact {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-contact li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-2);
+    color: var(--gray-400);
+}
+
+.footer-contact svg {
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    border-top: 1px solid var(--gray-700);
+    padding-top: var(--spacing-4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-3);
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: var(--gray-500);
+    font-size: var(--font-size-sm);
+}
+
+.proudly-text {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    color: var(--primary) !important;
+}
+
+.proudly-text svg {
+    color: var(--primary);
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-6);
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-6);
+        text-align: center;
+    }
+
+    .logo {
+        justify-content: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .footer-contact li {
+        justify-content: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-2);
+    }
+
+    .proudly-text {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: var(--spacing-6) 0 var(--spacing-3);
+    }
+
+    .footer-content {
+        gap: var(--spacing-4);
+    }
+
+    .social-links {
+        gap: var(--spacing-2);
+    }
+
+    .social-links a {
+        width: 36px;
+        height: 36px;
+    }
+
+    .logo {
+        flex-direction: column;
+        gap: var(--spacing-1);
+    }
+
+    .logo-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .logo-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+}

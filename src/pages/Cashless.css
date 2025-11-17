@@ -1,0 +1,426 @@
+ .cashless-page {
+     min-height: 100vh;
+     background: var(--page-bg);
+     color: var(--text-primary);
+     line-height: 1.7;
+ }
+
+ .cashless-container {
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 0 var(--spacing-6);
+ }
+
+ /* Header Section */
+ .cashless-header {
+     background: var(--card-bg);
+     padding: var(--spacing-12) 0;
+     border-bottom: 1px solid var(--border-color);
+ }
+
+ .cashless-header .cashless-container {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     text-align: left;
+     gap: var(--spacing-6);
+ }
+
+ .cashless-title {
+     font-size: var(--font-size-4xl);
+     font-weight: 900;
+     color: var(--primary);
+     margin: 0;
+     text-transform: uppercase;
+     letter-spacing: 3px;
+     text-align: center;
+     width: 100%;
+ }
+
+ .cashless-description {
+     color: var(--text-primary);
+     max-width: 900px;
+     margin: 0 auto;
+ }
+
+ .cashless-description p {
+     font-size: var(--font-size-base);
+     margin-bottom: var(--spacing-4);
+     text-align: justify;
+     color: var(--text-primary);
+ }
+
+ .cashless-description p:last-child {
+     margin-bottom: 0;
+     font-weight: 600;
+     color: var(--text-primary);
+ }
+
+ /* Advantages Section */
+ .advantages-section {
+     padding: var(--spacing-12) 0;
+     background: var(--page-bg);
+ }
+
+ .advantages-grid {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: var(--spacing-8);
+     max-width: 1000px;
+     margin: 0 auto;
+ }
+
+ .advantages-column {
+     background: var(--card-bg);
+     padding: var(--spacing-6);
+     border-radius: var(--border-radius-lg);
+     border: 1px solid var(--border-color);
+     box-shadow: var(--shadow);
+ }
+
+ .advantages-column-title {
+     font-size: var(--font-size-xl);
+     font-weight: 700;
+     color: var(--text-primary);
+     margin-bottom: var(--spacing-4);
+     padding-bottom: var(--spacing-2);
+     border-bottom: 2px solid var(--primary);
+ }
+
+ .advantages-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+     display: flex;
+     flex-direction: column;
+     gap: var(--spacing-4);
+ }
+
+ .advantage-item {
+     padding: var(--spacing-3);
+     background: var(--card-bg);
+     border-radius: var(--border-radius);
+     border-left: 3px solid var(--primary);
+     font-size: var(--font-size-base);
+     line-height: 1.5;
+     transition: var(--transition);
+     color: var(--text-primary);
+     border: 1px solid var(--border-color);
+ }
+
+ .advantage-item:hover {
+     transform: translateX(4px);
+     background: var(--hover-bg);
+     border-color: var(--primary);
+ }
+
+ .advantage-item strong {
+     color: var(--primary);
+     font-weight: 700;
+ }
+
+ /* Journey Section */
+ .journey-section {
+     padding: var(--spacing-12) 0;
+     background: var(--card-bg);
+     position: relative;
+ }
+
+ .journey-section::before {
+     content: '';
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background:
+         radial-gradient(circle at 20% 80%, var(--primary) 0%, transparent 50%),
+         radial-gradient(circle at 80% 20%, var(--primary) 0%, transparent 50%);
+     opacity: 0.03;
+     pointer-events: none;
+ }
+
+ .journey-header {
+     text-align: center;
+     margin-bottom: var(--spacing-8);
+     position: relative;
+ }
+
+ .journey-main-title {
+     font-size: var(--font-size-4xl);
+     font-weight: 900;
+     color: var(--text-primary);
+     margin: 0 0 var(--spacing-2) 0;
+     text-transform: uppercase;
+     letter-spacing: 4px;
+ }
+
+ .journey-subtitle {
+     font-size: var(--font-size-xl);
+     font-weight: 600;
+     color: var(--text-primary);
+     margin: 0;
+     text-transform: uppercase;
+     letter-spacing: 2px;
+     opacity: 0.9;
+ }
+
+ .instructions-header {
+     text-align: center;
+     margin-bottom: var(--spacing-8);
+     padding: var(--spacing-4);
+     background: var(--background-secondary);
+     border-radius: var(--border-radius-lg);
+     border: 1px solid var(--border-color);
+     max-width: 500px;
+     margin-left: auto;
+     margin-right: auto;
+ }
+
+ .instructions-title {
+     font-size: var(--font-size-base);
+     font-weight: 600;
+     color: var(--text-primary);
+     margin: 0;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+ }
+
+ .journey-steps {
+     display: grid;
+     grid-template-columns: repeat(3, 1fr);
+     gap: var(--spacing-6);
+     max-width: 1000px;
+     margin: 0 auto;
+     position: relative;
+ }
+
+ .journey-step {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     text-align: center;
+     position: relative;
+ }
+
+ .step-number {
+     width: 60px;
+     height: 60px;
+     background: var(--primary);
+     color: white;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-weight: 900;
+     font-size: var(--font-size-xl);
+     margin-bottom: var(--spacing-4);
+     border: 4px solid var(--card-bg);
+     box-shadow: var(--shadow-lg);
+     z-index: 2;
+     position: relative;
+     transition: var(--transition);
+ }
+
+ .step-number {
+     background: var(--primary);
+     color: var(--text-on-primary) !important;
+     border: 4px solid var(--card-bg);
+ }
+
+ .journey-step:hover .step-number {
+     transform: scale(1.1);
+     background: var(--primary-dark);
+ }
+
+ .step-content {
+     background: var(--card-bg);
+     padding: var(--spacing-5);
+     border-radius: var(--border-radius-lg);
+     border: 1px solid var(--border-color);
+     box-shadow: var(--shadow);
+     width: 100%;
+     min-height: 140px;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     transition: var(--transition);
+     position: relative;
+     z-index: 1;
+ }
+
+ .journey-step:hover .step-content {
+     transform: translateY(-2px);
+     box-shadow: var(--shadow-lg);
+     border-color: var(--primary);
+ }
+
+ .step-title {
+     font-size: var(--font-size-base);
+     font-weight: 700;
+     color: var(--primary);
+     margin: 0 0 var(--spacing-2) 0;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+ }
+
+ .step-description {
+     font-size: var(--font-size-sm);
+     color: var(--text-primary);
+     line-height: 1.4;
+     margin: 0;
+     opacity: 0.9;
+ }
+
+ /* Footer */
+ .cashless-footer {
+     background: var(--card-bg);
+     padding: var(--spacing-6) 0;
+     border-top: 1px solid var(--border-color);
+     margin-top: var(--spacing-8);
+ }
+
+ .cashless-footer .cashless-container {
+     text-align: center;
+ }
+
+ .cashless-footer p {
+     font-size: var(--font-size-sm);
+     color: var(--text-primary);
+     margin: 0;
+     opacity: 0.8;
+ }
+
+ /* Responsive Design */
+ @media (max-width: 1024px) {
+     .journey-steps {
+         grid-template-columns: repeat(2, 1fr);
+         gap: var(--spacing-6);
+     }
+
+     .advantages-grid {
+         gap: var(--spacing-6);
+     }
+ }
+
+ @media (max-width: 768px) {
+     .cashless-container {
+         padding: 0 var(--spacing-4);
+     }
+
+     .cashless-title {
+         font-size: var(--font-size-3xl);
+     }
+
+     .cashless-description p {
+         font-size: var(--font-size-sm);
+         text-align: left;
+     }
+
+     .advantages-grid {
+         grid-template-columns: 1fr;
+         gap: var(--spacing-6);
+     }
+
+     .advantages-column {
+         padding: var(--spacing-5);
+     }
+
+     .journey-steps {
+         grid-template-columns: 1fr;
+         gap: var(--spacing-5);
+         max-width: 400px;
+     }
+
+     .journey-main-title {
+         font-size: var(--font-size-3xl);
+     }
+
+     .journey-subtitle {
+         font-size: var(--font-size-lg);
+     }
+
+     .step-content {
+         padding: var(--spacing-4);
+         min-height: 120px;
+     }
+
+     .step-number {
+         width: 50px;
+         height: 50px;
+         font-size: var(--font-size-lg);
+     }
+ }
+
+ @media (max-width: 480px) {
+     .cashless-header {
+         padding: var(--spacing-8) 0;
+     }
+
+     .advantages-section,
+     .journey-section {
+         padding: var(--spacing-8) 0;
+     }
+
+     .cashless-title {
+         font-size: var(--font-size-2xl);
+     }
+
+     .journey-main-title {
+         font-size: var(--font-size-2xl);
+     }
+
+     .step-number {
+         width: 45px;
+         height: 45px;
+         font-size: var(--font-size-base);
+     }
+
+     .step-title {
+         font-size: var(--font-size-sm);
+     }
+
+     .step-description {
+         font-size: var(--font-size-xs);
+     }
+ }
+
+ /* Dark Mode Optimizations */
+ [data-theme="dark"] .step-number {
+     background: var(--primary);
+     color: white !important;
+     border-color: var(--card-bg);
+ }
+
+ [data-theme="dark"] .journey-step:hover .step-number {
+     background: var(--primary-light);
+ }
+
+ [data-theme="dark"] .advantages-column {
+     background: var(--card-bg);
+     border-color: var(--border-color);
+ }
+
+ [data-theme="dark"] .advantage-item {
+     background: var(--card-bg);
+     border-left-color: var(--primary);
+ }
+
+ [data-theme="dark"] .journey-section::before {
+     opacity: 0.05;
+ }
+
+ [data-theme="dark"] .step-content {
+     background: var(--card-bg);
+     border-color: var(--border-color);
+ }
+
+ [data-theme="dark"] .instructions-header {
+     background: var(--background-secondary);
+     border-color: var(--border-color);
+ }
+
+ [data-theme="dark"] .cashless-footer {
+     background: var(--card-bg);
+     border-color: var(--border-color);
+ }

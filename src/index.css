@@ -1,0 +1,381 @@
+/* Reset e base moderno */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Cores Light Mode */
+  --primary-50: #f0f9ff;
+  --primary-100: #e0f2fe;
+  --primary-500: #0ea5e9;
+  --primary-600: #0284c7;
+  --primary-700: #0369a1;
+
+  --secondary-50: #fef7ff;
+  --secondary-500: #a855f7;
+  --secondary-600: #9333ea;
+
+  --accent-500: #f59e0b;
+  --accent-600: #d97706;
+
+  --success-500: #10b981;
+  --error-500: #ef4444;
+  --warning-500: #f59e0b;
+
+  /* Neutros Light Mode */
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+
+  --white: #ffffff;
+  --black: #000000;
+
+  /* Cores Dark Mode */
+  --dark-bg: #0f172a;
+  --dark-surface: #1e293b;
+  --dark-card: #334155;
+  --dark-text: #f1f5f9;
+  --dark-text-secondary: #cbd5e1;
+
+  /* Tipografia */
+  --font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+
+  /* Espaçamentos */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+
+  /* Bordas */
+  --border-radius: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --border-radius-xl: 1rem;
+  --border-radius-2xl: 1.5rem;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  /* Transições */
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Gradientes */
+  --gradient-primary: linear-gradient(135deg, var(--primary-500), var(--primary-700));
+  --gradient-secondary: linear-gradient(135deg, var(--secondary-500), var(--secondary-600));
+  --gradient-accent: linear-gradient(135deg, var(--accent-500), var(--accent-600));
+  --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-dark: linear-gradient(135deg, var(--gray-900), var(--gray-800));
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+  --bg-primary: var(--dark-bg);
+  --bg-secondary: var(--dark-surface);
+  --bg-card: var(--dark-card);
+  --text-primary: var(--dark-text);
+  --text-secondary: var(--dark-text-secondary);
+  --border-color: var(--gray-700);
+}
+
+/* Light Mode Variables */
+[data-theme="light"] {
+  --bg-primary: var(--white);
+  --bg-secondary: var(--gray-50);
+  --bg-card: var(--white);
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-600);
+  --border-color: var(--gray-200);
+}
+
+/* Base Styles */
+body {
+  font-family: var(--font-family);
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition: var(--transition-slow);
+}
+
+/* Scroll suave moderno */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Container padrão */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-4);
+}
+
+/* Utilidades */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.mt-4 {
+  margin-top: var(--spacing-4);
+}
+
+.mb-4 {
+  margin-bottom: var(--spacing-4);
+}
+
+.p-4 {
+  padding: var(--spacing-4);
+}
+
+/* Loading states modernos */
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--border-color) 50%, var(--bg-secondary) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: var(--border-radius);
+}
+
+.skeleton-text {
+  height: 1rem;
+  margin-bottom: var(--spacing-2);
+}
+
+.skeleton-header {
+  height: 2rem;
+  margin-bottom: var(--spacing-4);
+}
+
+.skeleton-content {
+  height: 200px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Animações modernas */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.4s ease-out;
+}
+
+.scale-in {
+  animation: scaleIn 0.3s ease-out;
+}
+
+/* Glassmorphism Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .glass {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Focus states para acessibilidade */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+  border-radius: var(--border-radius);
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-500);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--gray-600);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-500);
+}
+
+/* Dark Mode Fixes */
+[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --border-color: #475569;
+}
+
+[data-theme="dark"] .event-card,
+[data-theme="dark"] .event-filters,
+[data-theme="dark"] .order-summary,
+[data-theme="dark"] .checkout-form-section,
+[data-theme="dark"] .tickets-section,
+[data-theme="dark"] .cashless-preview,
+[data-theme="dark"] .benefit-card,
+[data-theme="dark"] .step-content,
+[data-theme="dark"] .faq-item,
+[data-theme="dark"] .stat-card {
+  background: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .event-card h3,
+[data-theme="dark"] .event-card .event-title,
+[data-theme="dark"] .event-card .event-artist,
+[data-theme="dark"] .event-filters h3,
+[data-theme="dark"] .section-header h2,
+[data-theme="dark"] .page-header h1,
+[data-theme="dark"] .benefit-title,
+[data-theme="dark"] .step-title,
+[data-theme="dark"] .faq-question {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .event-card .event-date-time,
+[data-theme="dark"] .event-card .event-location,
+[data-theme="dark"] .event-card .price-from,
+[data-theme="dark"] .section-header p,
+[data-theme="dark"] .page-header p,
+[data-theme="dark"] .benefit-description,
+[data-theme="dark"] .step-description,
+[data-theme="dark"] .faq-answer {
+  color: var(--text-secondary) !important;
+}
+
+/* Force dark mode on all cards */
+[data-theme="dark"] * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

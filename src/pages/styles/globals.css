@@ -1,0 +1,281 @@
+/* Importar todos os estilos */
+@import './components/header.css';
+@import './components/events.css';
+@import './components/buttons.css';
+@import './components/checkout.css';
+@import './pages/home.css';
+@import './pages/events.css';
+@import './pages/cashless.css';
+@import './pages/gallery.css';
+@import './pages/contact.css';
+@import './pages/search-filters.css';
+
+/* Estilos globais adicionais */
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.main-content {
+    flex: 1;
+    padding-top: 80px;
+    /* Compensar header fixo */
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: relative;
+    width: 60px;
+    height: 32px;
+    background: var(--gray-300);
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: var(--white);
+    border-radius: 50%;
+    transition: var(--transition);
+    transform: translateX(0);
+}
+
+[data-theme="dark"] .theme-toggle {
+    background: var(--primary-500);
+}
+
+[data-theme="dark"] .theme-toggle::before {
+    transform: translateX(28px);
+}
+
+.theme-toggle-icon {
+    position: absolute;
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.theme-toggle .sun {
+    left: 8px;
+    opacity: 1;
+}
+
+.theme-toggle .moon {
+    right: 8px;
+    opacity: 0;
+}
+
+[data-theme="dark"] .theme-toggle .sun {
+    opacity: 0;
+}
+
+[data-theme="dark"] .theme-toggle .moon {
+    opacity: 1;
+}
+
+/* Estados de hover melhorados */
+.hover-lift {
+    transition: var(--transition);
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+}
+
+.hover-scale {
+    transition: var(--transition);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+/* Grid system moderno */
+.grid {
+    display: grid;
+}
+
+.grid-cols-1 {
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.gap-4 {
+    gap: var(--spacing-4);
+}
+
+.gap-6 {
+    gap: var(--spacing-6);
+}
+
+.gap-8 {
+    gap: var(--spacing-8);
+}
+
+/* Responsividade base */
+@media (max-width: 768px) {
+    .main-content {
+        padding-top: 70px;
+    }
+
+    .grid-cols-2,
+    .grid-cols-3,
+    .grid-cols-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .grid-cols-3,
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Utility classes para espaçamento */
+.space-y-4>*+* {
+    margin-top: var(--spacing-4);
+}
+
+.space-y-6>*+* {
+    margin-top: var(--spacing-6);
+}
+
+.space-x-4>*+* {
+    margin-left: var(--spacing-4);
+}
+
+/* Text utilities */
+.text-sm {
+    font-size: var(--font-size-sm);
+}
+
+.text-base {
+    font-size: var(--font-size-base);
+}
+
+.text-lg {
+    font-size: var(--font-size-lg);
+}
+
+.text-xl {
+    font-size: var(--font-size-xl);
+}
+
+.text-2xl {
+    font-size: var(--font-size-2xl);
+}
+
+.font-light {
+    font-weight: 300;
+}
+
+.font-normal {
+    font-weight: 400;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+/* Color utilities */
+.text-primary {
+    color: var(--text-primary);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.text-accent {
+    color: var(--accent-500);
+}
+
+.bg-primary {
+    background: var(--bg-primary);
+}
+
+.bg-secondary {
+    background: var(--bg-secondary);
+}
+
+.bg-card {
+    background: var(--bg-card);
+}
+
+/* Border utilities */
+.border {
+    border: 1px solid var(--border-color);
+}
+
+.border-2 {
+    border: 2px solid var(--border-color);
+}
+
+.rounded {
+    border-radius: var(--border-radius);
+}
+
+.rounded-lg {
+    border-radius: var(--border-radius-lg);
+}
+
+.rounded-xl {
+    border-radius: var(--border-radius-xl);
+}
+
+/* Shadow utilities */
+.shadow-sm {
+    box-shadow: var(--shadow-sm);
+}
+
+.shadow {
+    box-shadow: var(--shadow);
+}
+
+.shadow-md {
+    box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+    box-shadow: var(--shadow-lg);
+}
+
+/* Transition utilities */
+.transition {
+    transition: var(--transition);
+}
+
+.transition-slow {
+    transition: var(--transition-slow);
+}

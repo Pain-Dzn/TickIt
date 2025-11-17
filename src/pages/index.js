@@ -1,0 +1,7 @@
+export { default as Home } from './Home'
+export { default as Events } from './Events'
+export { default as EventDetails } from './EventDetails'
+export { default as Checkout } from './Checkout'
+export { default as Cashless } from './Cashless'
+export { default as Gallery } from './Gallery'
+export { default as Contact } from './Contact'

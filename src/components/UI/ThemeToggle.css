@@ -1,0 +1,90 @@
+/* Theme Toggle Styles */
+.theme-toggle {
+    position: relative;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle:focus {
+    outline: none;
+    ring: 2px solid var(--primary-500);
+    ring-offset: 2px;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Theme Selector Styles */
+.theme-selector {
+    z-index: 1000;
+}
+
+.animate-scaleIn {
+    animation: scaleIn 0.2s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Smooth theme transitions */
+* {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure images don't transition */
+img {
+    transition: none !important;
+}
+
+/* Performance optimization for theme transitions */
+.theme-transition * {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* System preference detection */
+@media (prefers-reduced-motion: reduce) {
+
+    .theme-toggle,
+    .theme-selector,
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .theme-toggle {
+        border: 2px solid currentColor;
+    }
+
+    .theme-selector {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .theme-toggle {
+        transition: none;
+    }
+
+    .theme-selector {
+        animation: none;
+    }
+}
