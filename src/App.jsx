@@ -10,7 +10,6 @@ import Home from './pages/Home'
 import Events from './pages/Events'
 import EventDetails from './pages/EventDetails'
 import Checkout from './pages/Checkout'
-import Cashless from './pages/Cashless'
 import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
 import './pages/styles/globals.css'
@@ -31,7 +30,6 @@ function App() {
                   <Route path="/eventos" element={<Events language={language} />} />
                   <Route path="/evento/:id" element={<EventDetails language={language} />} />
                   <Route path="/checkout" element={<Checkout language={language} />} />
-                  <Route path="/cashless" element={<Cashless language={language} />} />
                   <Route path="/galeria" element={<Gallery language={language} />} />
                   <Route path="/contactos" element={<Contact language={language} />} />
                 </Routes>

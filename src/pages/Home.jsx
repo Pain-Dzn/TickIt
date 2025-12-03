@@ -20,7 +20,6 @@ const Home = ({ language = 'pt' }) => {
             search: 'Buscar',
             featured: 'Eventos em Destaque',
             viewAll: 'Ver Todos os Eventos',
-            cashlessTitle: '💳 Sistema Cashless Tabater',
             cashlessDesc: 'Pagamentos rápidos e seguros sem dinheiro físico. Use pulseiras eletrónicas para comprar comida, bebidas e muito mais.',
             knowMore: 'Saber Mais',
             stats: {
@@ -36,7 +35,6 @@ const Home = ({ language = 'pt' }) => {
             search: 'Search',
             featured: 'Featured Events',
             viewAll: 'View All Events',
-            cashlessTitle: '💳 Tabater Cashless System',
             cashlessDesc: 'Fast and secure payments without physical money. Use electronic bracelets to buy food, drinks and much more.',
             knowMore: 'Know More',
             stats: {
@@ -107,17 +105,7 @@ const Home = ({ language = 'pt' }) => {
                     <EventsGrid events={featuredEvents} language={language} />
 
                     {/* Sistema Cashless Preview */}
-                    <div className="cashless-preview">
-                        <div className="cashless-content">
-                            <h3>{t.cashlessTitle}</h3>
-                            <p>
-                                {t.cashlessDesc}
-                            </p>
-                            <Link to="/cashless" className="btn btn-secondary">
-                                {t.knowMore}
-                            </Link>
-                        </div>
-                    </div>
+
                 </div>
             </section>
         </div>

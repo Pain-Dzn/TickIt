@@ -11,7 +11,6 @@ const Header = ({ language, setLanguage }) => {
     const navigation = [
         { path: '/', label: { pt: 'Início', en: 'Home' } },
         { path: '/eventos', label: { pt: 'Eventos', en: 'Events' } },
-        { path: '/cashless', label: { pt: 'Cashless', en: 'Cashless' } },
         { path: '/galeria', label: { pt: 'Galeria', en: 'Gallery' } },
         { path: '/contactos', label: { pt: 'Contactos', en: 'Contact' } }
     ]
