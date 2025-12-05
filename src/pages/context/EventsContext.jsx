@@ -6,63 +6,73 @@ const EventsContext = createContext()
 export const useEvents = () => {
     const context = useContext(EventsContext)
     if (!context) {
-        throw new Error('useEvents must be used within EventsProvider')
+        throw new Error('useEvents deve ser usado dentro de EventsProvider')
     }
     return context
 }
 
 export const EventsProvider = ({ children }) => {
-    const [events] = useState(eventsData)
-    const [filters, setFilters] = useState({
-        search: '',
-        province: '',
-        category: '',
-        date: ''
+    const [eventos] = useState(eventsData)
+    const [filtros, setFiltros] = useState({
+        busca: '',
+        provincia: '',
+        categoria: '',
+        data: '',
+        preco: ''
     })
 
-    const filteredEvents = events.filter(event => {
-        const matchesSearch = !filters.search ||
-            event.name.pt.toLowerCase().includes(filters.search.toLowerCase()) ||
-            event.location.city.toLowerCase().includes(filters.search.toLowerCase()) ||
-            event.artist?.toLowerCase().includes(filters.search.toLowerCase())
+    const eventosFiltrados = eventos.filter(evento => {
+        const correspondeBusca = !filtros.busca ||
+            evento.name.pt.toLowerCase().includes(filtros.busca.toLowerCase()) ||
+            evento.location.city.toLowerCase().includes(filtros.busca.toLowerCase()) ||
+            evento.artist?.toLowerCase().includes(filtros.busca.toLowerCase())
 
-        const matchesProvince = !filters.province || event.location.province === filters.province
-        const matchesCategory = !filters.category || event.category === filters.category
-        const matchesDate = !filters.date || event.date === filters.date
+        const correspondeProvincia = !filtros.provincia || evento.location.province === filtros.provincia
+        const correspondeCategoria = !filtros.categoria || evento.category === filtros.categoria
+        const correspondeData = !filtros.data || evento.date === filtros.data
+        const correspondePreco = !filtros.preco || (
+            (filtros.preco === 'gratis' && evento.startingPrice === 0) ||
+            (filtros.preco === '0-500' && evento.startingPrice > 0 && evento.startingPrice <= 500) ||
+            (filtros.preco === '500-1000' && evento.startingPrice > 500 && evento.startingPrice <= 1000) ||
+            (filtros.preco === '1000-2000' && evento.startingPrice > 1000 && evento.startingPrice <= 2000) ||
+            (filtros.preco === '2000+' && evento.startingPrice > 2000)
+        )
 
-        return matchesSearch && matchesProvince && matchesCategory && matchesDate
+        return correspondeBusca && correspondeProvincia && correspondeCategoria && correspondeData && correspondePreco
     })
 
-    const updateFilters = (newFilters) => {
-        setFilters(prev => ({ ...prev, ...newFilters }))
+    const atualizarFiltros = (novosFiltros) => {
+        setFiltros(prev => ({ ...prev, ...novosFiltros }))
     }
 
-    const clearFilters = () => {
-        setFilters({
-            search: '',
-            province: '',
-            category: '',
-            date: ''
+    const limparFiltros = () => {
+        setFiltros({
+            busca: '',
+            provincia: '',
+            categoria: '',
+            data: '',
+            preco: ''
         })
     }
 
-    const getEventById = (id) => {
-        return events.find(event => event.id === parseInt(id))
+    const obterEventoPorId = (id) => {
+        return eventos.find(evento => evento.id === parseInt(id))
     }
 
-    const value = {
-        events: filteredEvents,
-        allEvents: events,
-        filters,
-        updateFilters,
-        clearFilters,
-        getEventById
+    const valor = {
+        eventos: eventosFiltrados,
+        todosEventos: eventos,
+        filtros,
+        atualizarFiltros,
+        limparFiltros,
+        obterEventoPorId
     }
 
     return (
-        <EventsContext.Provider value={value}>
+        <EventsContext.Provider value={valor}>
             {children}
         </EventsContext.Provider>
     )
 }
+
 export default EventsContext

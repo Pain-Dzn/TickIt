@@ -438,3 +438,109 @@
         display: none !important;
     }
 }
+
+/* Adicionar ao final do header.css existente */
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: var(--transition);
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.05);
+}
+
+.theme-toggle-btn:focus {
+    outline: none;
+}
+
+.theme-toggle-btn:focus-visible {
+    outline: 2px solid var(--primary-500);
+    outline-offset: 2px;
+    border-radius: var(--border-radius-lg);
+}
+
+.theme-toggle-track {
+    position: relative;
+    width: 56px;
+    height: 28px;
+    background: var(--gray-300);
+    border-radius: 14px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.theme-toggle-track.dark {
+    background: var(--gray-600);
+}
+
+.theme-toggle-knob {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    left: 2px;
+    border: 2px solid white;
+}
+
+.theme-toggle-track.dark .theme-toggle-knob {
+    transform: translateX(28px);
+    background: var(--gray-800);
+    border-color: var(--gray-700);
+}
+
+.theme-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.theme-toggle-track:not(.dark) .theme-icon {
+    color: #f59e0b;
+}
+
+.theme-toggle-track.dark .theme-icon {
+    color: #fcd34d;
+}
+
+/* Mobile Theme Section */
+.mobile-theme-section {
+    padding: var(--spacing-4);
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: var(--spacing-4);
+}
+
+.theme-toggle-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.theme-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .mobile-theme-section {
+        display: flex;
+    }
+}
+
+@media (min-width: 769px) {
+    .mobile-theme-section {
+        display: none;
+    }
+}

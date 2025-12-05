@@ -1,27 +1,14 @@
 import React from 'react'
 import EventCard from './EventCard'
 
-const EventsGrid = ({ events, loading = false, language = 'pt', columnsMobile = 1 }) => {
-    const translations = {
-        pt: {
-            noEvents: 'Nenhum evento encontrado',
-            adjustFilters: 'Tente ajustar os seus filtros de busca'
-        },
-        en: {
-            noEvents: 'No events found',
-            adjustFilters: 'Try adjusting your search filters'
-        }
-    }
-
-    const t = translations[language] || translations.pt
-
-    if (loading) {
+const EventsGrid = ({ eventos, carregando = false, colunasMobile = 1 }) => {
+    if (carregando) {
         return (
-            <div className={`events-grid mobile-cols-${columnsMobile}`}>
+            <div className={`grid-eventos mobile-cols-${colunasMobile}`}>
                 {[...Array(6)].map((_, index) => (
-                    <div key={index} className="event-card skeleton">
-                        <div className="event-card-image skeleton"></div>
-                        <div className="event-card-content">
+                    <div key={index} className="card-evento skeleton">
+                        <div className="imagem-card-evento skeleton"></div>
+                        <div className="conteudo-card-evento">
                             <div className="skeleton skeleton-text"></div>
                             <div className="skeleton skeleton-text"></div>
                             <div className="skeleton skeleton-text"></div>
@@ -32,24 +19,27 @@ const EventsGrid = ({ events, loading = false, language = 'pt', columnsMobile = 
         )
     }
 
-    if (events.length === 0) {
+    if (eventos.length === 0) {
         return (
-            <div className="events-empty">
-                <div className="empty-state">
-                    <div className="empty-icon">
-                        <i className="fas fa-search"></i>
+            <div className="eventos-vazios">
+                <div className="estado-vazio">
+                    <div className="icone-vazio">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                                strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
                     </div>
-                    <h3>{t.noEvents}</h3>
-                    <p>{t.adjustFilters}</p>
+                    <h3>Nenhum evento encontrado</h3>
+                    <p>Tente ajustar os seus filtros de busca</p>
                 </div>
             </div>
         )
     }
 
     return (
-        <div className={`events-grid mobile-cols-${columnsMobile}`}>
-            {events.map(event => (
-                <EventCard key={event.id} event={event} language={language} />
+        <div className={`grid-eventos mobile-cols-${colunasMobile}`}>
+            {eventos.map(evento => (
+                <EventCard key={evento.id} evento={evento} />
             ))}
         </div>
     )

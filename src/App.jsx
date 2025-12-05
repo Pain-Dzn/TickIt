@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { EventsProvider } from './pages/context/EventsContext'
 import { CartProvider } from './pages/context/CartContext'
@@ -12,29 +12,34 @@ import EventDetails from './pages/EventDetails'
 import Checkout from './pages/Checkout'
 import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
+import './pages/styles/variables.css'
 import './pages/styles/globals.css'
+import './pages/styles/pages/home.css'
+import './pages/styles/pages/events.css'
+import './pages/styles/components/checkout.css'
+import './pages/styles/components/header.css'
+import './pages/styles/pages/gallery.css'
+import './pages/styles/pages/contact.css'
 
 function App() {
-  const [language, setLanguage] = useState('pt')
-
   return (
     <ThemeProvider>
       <EventsProvider>
         <CartProvider>
           <Router>
             <div className="app">
-              <Header language={language} setLanguage={setLanguage} />
+              <Header />
               <main className="main-content">
                 <Routes>
-                  <Route path="/" element={<Home language={language} />} />
-                  <Route path="/eventos" element={<Events language={language} />} />
-                  <Route path="/evento/:id" element={<EventDetails language={language} />} />
-                  <Route path="/checkout" element={<Checkout language={language} />} />
-                  <Route path="/galeria" element={<Gallery language={language} />} />
-                  <Route path="/contactos" element={<Contact language={language} />} />
+                  <Route path="/" element={<Home />} />
+                  <Route path="/eventos" element={<Events />} />
+                  <Route path="/evento/:id" element={<EventDetails />} />
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/galeria" element={<Gallery />} />
+                  <Route path="/contactos" element={<Contact />} />
                 </Routes>
               </main>
-              <Footer language={language} />
+              <Footer />
             </div>
           </Router>
         </CartProvider>

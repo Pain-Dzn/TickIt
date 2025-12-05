@@ -1,18 +1,17 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { useCart } from '../../pages/context/CartContext'
-import ThemeToggle from '../UI/ThemeToggle'
+import { useTheme } from '../../pages/context/ThemeContext'
 
-const Header = ({ language, setLanguage }) => {
+const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const location = useLocation()
-    const { getCartCount } = useCart()
+    const { theme, toggleTheme, isDark } = useTheme()
 
     const navigation = [
-        { path: '/', label: { pt: 'Início', en: 'Home' } },
-        { path: '/eventos', label: { pt: 'Eventos', en: 'Events' } },
-        { path: '/galeria', label: { pt: 'Galeria', en: 'Gallery' } },
-        { path: '/contactos', label: { pt: 'Contactos', en: 'Contact' } }
+        { path: '/', label: 'Início' },
+        { path: '/eventos', label: 'Eventos' },
+        { path: '/galeria', label: 'Galeria' },
+        { path: '/contactos', label: 'Contactos' }
     ]
 
     const isActive = (path) => location.pathname === path
@@ -23,7 +22,7 @@ const Header = ({ language, setLanguage }) => {
                 <div className="header-content">
                     {/* Logo */}
                     <Link to="/" className="logo">
-                        <span className="logo-text">TABATER</span>
+                        <span className="logo-text">TickIt</span>
                     </Link>
 
                     {/* Navegação Desktop */}
@@ -34,40 +33,40 @@ const Header = ({ language, setLanguage }) => {
                                 to={item.path}
                                 className={`nav-link ${isActive(item.path) ? 'active' : ''}`}
                             >
-                                {item.label[language]}
+                                {item.label}
                             </Link>
                         ))}
                     </nav>
 
                     {/* Controlos Desktop */}
                     <div className="header-controls">
-                        {/* Theme Toggle - Apenas no desktop */}
-                        <div className="desktop-theme">
-                            <ThemeToggle size="medium" showLabel={false} />
-                        </div>
-
-                        {/* Seletor de Idioma - Apenas no desktop */}
-                        <select
-                            value={language}
-                            onChange={(e) => setLanguage(e.target.value)}
-                            className="language-selector desktop-only"
+                        {/* Theme Toggle - Desktop */}
+                        <button
+                            onClick={toggleTheme}
+                            className="theme-toggle-btn"
+                            aria-label={`Mudar para tema ${isDark ? 'claro' : 'escuro'}`}
+                            title={`Tema ${isDark ? 'escuro' : 'claro'} - Clique para mudar`}
                         >
-                            <option value="pt">PT 🇲🇿</option>
-                            <option value="en">EN</option>
-                        </select>
-
-                        {/* Carrinho */}
-                        <Link to="/checkout" className="cart-icon">
-                            <span className="cart-icon-symbol">🛒</span>
-                            {getCartCount() > 0 && (
-                                <span className="cart-badge">{getCartCount()}</span>
-                            )}
-                        </Link>
+                            <div className={`theme-toggle-track ${isDark ? 'dark' : ''}`}>
+                                <div className="theme-toggle-knob">
+                                    {isDark ? (
+                                        <svg className="theme-icon" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                                        </svg>
+                                    ) : (
+                                        <svg className="theme-icon" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                                        </svg>
+                                    )}
+                                </div>
+                            </div>
+                        </button>
 
                         {/* Menu Mobile */}
                         <button
                             className="mobile-menu-btn"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            aria-label="Menu"
                         >
                             ☰
                         </button>
@@ -77,31 +76,29 @@ const Header = ({ language, setLanguage }) => {
                 {/* Menu Mobile */}
                 <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
                     <nav className="nav-mobile">
-                        {/* Theme Toggle no Mobile - Única instância */}
+                        {/* Theme Toggle no Mobile */}
                         <div className="mobile-theme-section">
                             <div className="theme-toggle-mobile">
-                                <span className="theme-label">
-                                    {language === 'pt' ? 'Tema:' : 'Theme:'}
-                                </span>
-                                <ThemeToggle size="medium" showLabel={false} />
-                            </div>
-
-                            {/* Seletor de Idioma no Mobile */}
-                            <div className="language-selector-mobile">
-                                <span className="language-label">
-                                    {language === 'pt' ? 'Idioma:' : 'Language:'}
-                                </span>
-                                <select
-                                    value={language}
-                                    onChange={(e) => {
-                                        setLanguage(e.target.value)
-                                        setIsMenuOpen(false)
-                                    }}
-                                    className="mobile-language-selector"
+                                <span className="theme-label">Tema:</span>
+                                <button
+                                    onClick={toggleTheme}
+                                    className="theme-toggle-btn"
+                                    aria-label={`Mudar para tema ${isDark ? 'claro' : 'escuro'}`}
                                 >
-                                    <option value="pt">Português 🇲🇿</option>
-                                    <option value="en">English</option>
-                                </select>
+                                    <div className={`theme-toggle-track ${isDark ? 'dark' : ''}`}>
+                                        <div className="theme-toggle-knob">
+                                            {isDark ? (
+                                                <svg className="theme-icon" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                                                </svg>
+                                            ) : (
+                                                <svg className="theme-icon" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                                                </svg>
+                                            )}
+                                        </div>
+                                    </div>
+                                </button>
                             </div>
                         </div>
 
@@ -113,7 +110,7 @@ const Header = ({ language, setLanguage }) => {
                                 className={`nav-link ${isActive(item.path) ? 'active' : ''}`}
                                 onClick={() => setIsMenuOpen(false)}
                             >
-                                {item.label[language]}
+                                {item.label}
                             </Link>
                         ))}
                     </nav>
