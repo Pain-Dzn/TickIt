@@ -616,3 +616,107 @@ h3 svg {
     background: var(--primary-dark);
     color: var(--primary-light);
 }
+
+/* Ajustes específicos para tema escuro */
+[data-theme="dark"] .form-group input::placeholder,
+[data-theme="dark"] .form-group textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+[data-theme="dark"] .payment-method.selected {
+    background: rgba(66, 153, 225, 0.15);
+}
+
+[data-theme="dark"] .type-quantity {
+    background: var(--primary-dark);
+    color: var(--primary-light);
+}
+
+/* Force dark mode colors para Order Summary */
+[data-theme="dark"] .order-summary {
+    background: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .order-summary h3,
+[data-theme="dark"] .order-summary h4 {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .ticket-type-summary {
+    background: var(--bg-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .type-summary-item {
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .type-name {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .type-total {
+    color: var(--primary) !important;
+}
+
+[data-theme="dark"] .order-item {
+    background: var(--bg-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .item-details h4,
+[data-theme="dark"] .item-details h5 {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .item-details p,
+[data-theme="dark"] .item-type {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .item-price {
+    color: var(--primary) !important;
+}
+
+[data-theme="dark"] .quantity-controls {
+    background: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .quantity-controls .quantity-btn {
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .quantity-controls .quantity {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .item-total {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .total-line {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .total-line.grand-total {
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .grand-total-amount {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .security-badge {
+    background: var(--bg-primary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .security-badge svg {
+    color: var(--primary) !important;
+}
