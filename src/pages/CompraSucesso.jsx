@@ -55,7 +55,6 @@ const CompraSucesso = () => {
             <div className="container">
                 <div className="success-header">
                     <div className="success-icon">
-                        <CheckCircle size={64} />
                     </div>
                     <h1>Compra Realizada com Sucesso!</h1>
                     <p className="success-subtitle">

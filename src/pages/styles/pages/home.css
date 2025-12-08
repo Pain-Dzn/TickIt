@@ -436,7 +436,8 @@
 @media (max-width: 768px) {
     .hero-section {
         min-height: auto;
-        padding: var(--spacing-12) 0;
+        padding-top: 100px;
+        padding-bottom: var(--spacing-12);
     }
 
     .hero-title {
@@ -460,6 +461,10 @@
 }
 
 @media (max-width: 480px) {
+    .hero-section {
+        padding-top: 80px;
+    }
+
     .ticket-card {
         transform: none;
         animation: none;
