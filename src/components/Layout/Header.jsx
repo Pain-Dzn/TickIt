@@ -10,6 +10,7 @@ const Header = () => {
     const navigation = [
         { path: '/', label: 'Início' },
         { path: '/eventos', label: 'Eventos' },
+        { path: '/sobre', label: 'Sobre' },
         { path: '/galeria', label: 'Galeria' },
         { path: '/contactos', label: 'Contactos' }
     ]

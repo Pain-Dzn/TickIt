@@ -126,19 +126,19 @@ const Contact = ({ language = 'pt' }) => {
         {
             icon: Mail,
             title: 'Email',
-            details: 'info@tabater.co.mz',
+            details: 'info@tickit.co.mz',
             description: t.responseTime
         },
         {
             icon: MapPin,
             title: language === 'pt' ? 'Escritório' : 'Office',
-            details: 'Av. 25 de Setembro, Maputo',
+            details: 'Av. Eduardo Mondlane, Maputo',
             description: t.officeHours
         },
         {
             icon: MessageCircle,
             title: 'WhatsApp',
-            details: '+258 85 635 0220',
+            details: '+258 85 505 9457',
             description: t.quickSupport
         }
     ]
@@ -235,12 +235,12 @@ const Contact = ({ language = 'pt' }) => {
                                     allowFullScreen=""
                                     loading="lazy"
                                     referrerPolicy="no-referrer-when-downgrade"
-                                    title="Tabater Office Location"
+                                    title="tickit Office Location"
                                 ></iframe>
                                 <div className="map-info">
                                     <h4 className="map-office">
                                         <Building size={20} />
-                                        Tabater Headquarters
+                                        tickit Headquarters
                                     </h4>
                                     <p>Av. 25 de Setembro, Maputo</p>
                                     <p>Edifício Jat, 3º Andar</p>

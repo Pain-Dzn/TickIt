@@ -185,7 +185,6 @@ const Gallery = ({ language = 'pt' }) => {
                 <div className="gallery-toolbar">
                     <div className="search-section">
                         <div className="search-input-wrapper">
-                            <Search size={20} className="search-icon" />
                             <input
                                 type="text"
                                 placeholder={t.searchPlaceholder}

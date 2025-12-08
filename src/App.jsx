@@ -10,12 +10,16 @@ import Home from './pages/Home'
 import Events from './pages/Events'
 import EventDetails from './pages/EventDetails'
 import Checkout from './pages/Checkout'
+import CompraSucesso from './pages/CompraSucesso'
+import About from './pages/About'
 import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
+
 import './pages/styles/variables.css'
 import './pages/styles/globals.css'
 import './pages/styles/pages/home.css'
 import './pages/styles/pages/events.css'
+import './pages/styles/pages/about.css'
 import './pages/styles/components/checkout.css'
 import './pages/styles/components/header.css'
 import './pages/styles/pages/gallery.css'
@@ -35,6 +39,8 @@ function App() {
                   <Route path="/eventos" element={<Events />} />
                   <Route path="/evento/:id" element={<EventDetails />} />
                   <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/compra-sucesso/:id" element={<CompraSucesso />} />
+                  <Route path="/sobre" element={<About />} />
                   <Route path="/galeria" element={<Gallery />} />
                   <Route path="/contactos" element={<Contact />} />
                 </Routes>

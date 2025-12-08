@@ -17,7 +17,7 @@ const Footer = ({ language = 'pt' }) => {
 
     const translations = {
         pt: {
-            description: 'O seu parceiro de confiança para bilhetes e sistema cashless em eventos por todo Moçambique.',
+            description: 'O seu parceiro de confiança para bilhetes em eventos por todo Moçambique.',
             quickLinks: 'Links Rápidos',
             contacts: 'Contactos',
             support: 'Suporte',
@@ -52,7 +52,7 @@ const Footer = ({ language = 'pt' }) => {
                             <div className="logo-icon">
                                 <Tent size={24} />
                             </div>
-                            <span className="logo-text">TABATER</span>
+                            <span className="logo-text">TickIt</span>
                         </div>
                         <p className="footer-description">
                             {t.description}
@@ -78,7 +78,6 @@ const Footer = ({ language = 'pt' }) => {
                         <h3>{t.quickLinks}</h3>
                         <ul className="footer-links">
                             <li><Link to="/eventos">Eventos</Link></li>
-                            <li><Link to="/cashless">Sistema Cashless</Link></li>
                             <li><Link to="/galeria">Galeria</Link></li>
                             <li><Link to="/contactos">Contactos</Link></li>
                         </ul>
@@ -90,15 +89,15 @@ const Footer = ({ language = 'pt' }) => {
                         <ul className="footer-contact">
                             <li>
                                 <Phone size={16} />
-                                +258 85 635 0220
+                                +258 85 505 9457
                             </li>
                             <li>
                                 <Mail size={16} />
-                                info@tabater.co.mz
+                                info@tickit.co.mz
                             </li>
                             <li>
                                 <MapPin size={16} />
-                                Av. 25 de Setembro, Maputo
+                                Av. Eduardo Mondlane
                             </li>
                         </ul>
                     </div>
@@ -115,7 +114,7 @@ const Footer = ({ language = 'pt' }) => {
                 </div>
 
                 <div className="footer-bottom">
-                    <p>&copy; {currentYear} Tabater. {t.rights}</p>
+                    <p>&copy; {currentYear} TickIt. {t.rights}</p>
                     <p className="proudly-text">
                         <Heart size={16} />
                         {t.proudly}

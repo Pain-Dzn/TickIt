@@ -31,7 +31,7 @@
     border: solid 3px black;
     width: 100%;
     padding: var(--spacing-3) var(--spacing-4);
-    border: 2px solid rgb(0, 238, 255);
+    border: 2px solid rgba(0, 26, 255, 0.493);
     border-radius: var(--border-radius-lg);
     background: var(--bg-card);
     color: var(--text-primary);

@@ -5,8 +5,9 @@ import SearchBar from '../components/UI/SearchBar'
 import { provincias, categorias, tiposPreco } from './data/provincesData'
 
 const Events = () => {
-    const { eventos, filtros, atualizarFiltros } = useEvents()
+    const { eventos, filtros, atualizarFiltros, resetarEventos, forcarReset } = useEvents()
     const [buscaLocal, setBuscaLocal] = useState(filtros.busca || '')
+    const [showResetButton, setShowResetButton] = useState(false)
 
     const lidarBusca = (termoBusca) => {
         setBuscaLocal(termoBusca)
@@ -15,9 +16,33 @@ const Events = () => {
 
     const temFiltrosAtivos = filtros.provincia || filtros.categoria || filtros.data || filtros.preco
 
+    // Verificar se há eventos sem bilhetes disponíveis
+    React.useEffect(() => {
+        const todosEsgotados = eventos.every(evento =>
+            evento.tickets.every(ticket => ticket.available <= 0)
+        )
+
+        if (todosEsgotados || eventos.length === 0) {
+            setShowResetButton(true)
+        }
+    }, [eventos])
+
     return (
         <div className="pagina-eventos">
             <div className="container">
+                {/* Botão de reset (visível apenas se todos estiverem esgotados) */}
+                {showResetButton && (
+                    <div className="dev-tools-banner">
+                        <div className="dev-tools-content">
+                            <p><strong>⚠️ Todos os bilhetes estão esgotados!</strong></p>
+                            <p>Clique no botão abaixo para resetar e começar os testes:</p>
+                            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 <div className="cabecalho-pagina">
                     <h1>Todos os Eventos</h1>
                     <p>Descubra os melhores eventos em Moçambique</p>
@@ -105,6 +130,10 @@ const Events = () => {
                         <h2 className="contador-eventos">
                             {eventos.length} evento{eventos.length !== 1 ? 's' : ''} encontrado{eventos.length !== 1 ? 's' : ''}
                         </h2>
+                        {/* Botões pequenos de reset no canto */}
+                        <div style={{ display: 'flex', gap: '5px' }}>
+
+                        </div>
                     </div>
 
                     <EventsGrid eventos={eventos} />

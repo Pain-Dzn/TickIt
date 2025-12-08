@@ -171,9 +171,7 @@ const Home = () => {
                     <div className="cta-content">
                         <h2>Pronto para viver momentos inesquecíveis?</h2>
                         <p>Junte-se a milhares de pessoas que já transformaram suas experiências</p>
-                        <Link to="/cadastro" className="btn btn-large btn-white">
-                            Criar Minha Conta
-                        </Link>
+
                     </div>
                 </div>
             </section>

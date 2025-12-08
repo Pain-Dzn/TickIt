@@ -1,99 +1,72 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from './context/CartContext'
+import { useEvents } from './context/EventsContext'
+import {
+    ArrowLeft, User, Mail, Phone, CreditCard,
+    Smartphone, Banknote, Shield, Zap, Ticket,
+    Trash2, Plus, Minus, FileText, Check
+} from 'lucide-react'
+import './Checkout.css'
 
 const Checkout = () => {
-    const Checkout = ({ language = 'pt' }) => {
-        // ... código existente ...
-
-        const translations = {
-            pt: {
-                title: 'Finalizar Compra',
-                step1: 'Passo 1 de 2: Suas Informações',
-                fullName: 'Nome Completo',
-                email: 'Email',
-                phone: 'WhatsApp',
-                nuit: 'NUIT (Opcional)',
-                orderSummary: 'Resumo do Pedido',
-                total: 'Total',
-                back: 'Voltar',
-                continue: 'Continuar Pagamento',
-                paymentMethods: 'Métodos de Pagamento',
-                mpesa: 'M-Pesa',
-                card: 'Cartão de Crédito',
-                transfer: 'Transferência Bancária',
-                complete: 'Finalizar Compra',
-                success: 'Compra Realizada com Sucesso!',
-                emptyCart: 'O seu carrinho está vazio',
-                emptyDesc: 'Adicione alguns bilhetes antes de finalizar a compra.',
-                exploreEvents: 'Explorar Eventos',
-                subtotal: 'Subtotal',
-                serviceFee: 'Taxa de serviço',
-                securePayment: 'Pagamento Seguro',
-                instantDelivery: 'Entrega Imediata',
-                // ... adicione mais traduções conforme necessário
-            },
-            en: {
-                title: 'Checkout',
-                step1: 'Step 1 of 2: Your Information',
-                fullName: 'Full Name',
-                email: 'Email',
-                phone: 'WhatsApp',
-                nuit: 'NUIT (Optional)',
-                orderSummary: 'Order Summary',
-                total: 'Total',
-                back: 'Back',
-                continue: 'Continue to Payment',
-                paymentMethods: 'Payment Methods',
-                mpesa: 'M-Pesa',
-                card: 'Credit Card',
-                transfer: 'Bank Transfer',
-                complete: 'Complete Purchase',
-                success: 'Purchase Completed Successfully!',
-                emptyCart: 'Your cart is empty',
-                emptyDesc: 'Add some tickets before checking out.',
-                exploreEvents: 'Explore Events',
-                subtotal: 'Subtotal',
-                serviceFee: 'Service fee',
-                securePayment: 'Secure Payment',
-                instantDelivery: 'Instant Delivery',
-            }
-        }
-
-        const t = translations[language] || translations.pt
-
-    }
     const navigate = useNavigate()
-    const { cart, clearCart, getCartTotal, updateQuantity, removeFromCart } = useCart()
+    const { cart, getCartTotal, updateQuantity, removeFromCart, finalizarCompra, getCartSummary } = useCart()
+    const { venderBilhetes } = useEvents()
 
     const [customerInfo, setCustomerInfo] = useState({
         fullName: '',
         email: '',
-        phone: '',
-        nuit: ''
+        phone: ''
     })
 
     const [paymentMethod, setPaymentMethod] = useState('mpesa')
     const [isProcessing, setIsProcessing] = useState(false)
 
-    const mozambicanNames = [
-        'Ana Macuácua', 'Carlos Matsinhe', 'Domingos Guenha', 'Elena Massango',
-        'Fernando Chissano', 'Graça Mabunda', 'Helder Nhampossa', 'Ilda Langa',
-        'João Muchanga', 'Leonor Sitoe', 'Manuel Tembe', 'Natália Cossa',
-        'Osvaldo Muianga', 'Paula Zita', 'Quim Santos', 'Rosa Chambisso',
-        'Sérgio Fumo', 'Teresa Manjate', 'Ulisses Muteque', 'Vera Manhiça'
-    ]
-
     const handleSubmit = async (e) => {
         e.preventDefault()
         setIsProcessing(true)
 
-        // Simular processamento
-        setTimeout(() => {
-            alert('🎉 Compra realizada com sucesso! Os bilhetes foram enviados para o seu email.')
-            clearCart()
-            navigate('/')
-        }, 2000)
+        if (!customerInfo.fullName.trim()) {
+            alert('Por favor, insira seu nome completo.')
+            setIsProcessing(false)
+            return
+        }
+
+        if (!customerInfo.email.trim() || !customerInfo.email.includes('@')) {
+            alert('Por favor, insira um email válido.')
+            setIsProcessing(false)
+            return
+        }
+
+        if (!customerInfo.phone.trim()) {
+            alert('Por favor, insira seu número de WhatsApp.')
+            setIsProcessing(false)
+            return
+        }
+
+        try {
+            const bilhetesGerados = {}
+            const compraId = `COMP-${Date.now()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`
+
+            cart.forEach(item => {
+                const codes = Array.from({ length: item.quantity }, (_, i) =>
+                    `TKT-${item.eventId}-${item.id}-${Date.now()}-${Math.random().toString(36).substr(2, 8).toUpperCase()}-${i + 1}`
+                )
+                bilhetesGerados[item.id] = codes
+
+                venderBilhetes(item.eventId, item.id, item.quantity)
+            })
+
+            await finalizarCompra(customerInfo, paymentMethod, bilhetesGerados, compraId)
+
+            navigate(`/compra-sucesso/${compraId}`)
+
+        } catch (error) {
+            console.error('Erro ao processar compra:', error)
+            alert('❌ Ocorreu um erro ao processar sua compra. Tente novamente.')
+            setIsProcessing(false)
+        }
     }
 
     const handleQuantityChange = (ticketId, change) => {
@@ -114,7 +87,7 @@ const Checkout = () => {
                 <div className="container">
                     <div className="empty-cart">
                         <div className="empty-state">
-                            <span className="empty-icon">🛒</span>
+                            <Ticket size={48} className="empty-icon" />
                             <h2>O seu carrinho está vazio</h2>
                             <p>Adicione alguns bilhetes antes de finalizar a compra.</p>
                             <button
@@ -131,6 +104,7 @@ const Checkout = () => {
     }
 
     const total = getCartTotal()
+    const cartSummary = getCartSummary()
 
     return (
         <div className="checkout-page">
@@ -141,12 +115,16 @@ const Checkout = () => {
                 </div>
 
                 <div className="checkout-layout">
-                    {/* Formulário */}
                     <div className="checkout-form-section">
                         <form onSubmit={handleSubmit} className="checkout-form">
-                            {/* Informações Pessoais */}
                             <div className="form-section">
-                                <h2>📋 Suas Informações</h2>
+                                <h2>
+                                    <User size={20} />
+                                    Suas Informações
+                                </h2>
+                                <p className="form-help-text">
+                                    Os bilhetes serão enviados para o email fornecido.
+                                </p>
 
                                 <div className="form-grid">
                                     <div className="form-group">
@@ -159,7 +137,7 @@ const Checkout = () => {
                                                 ...prev,
                                                 fullName: e.target.value
                                             }))}
-                                            placeholder={mozambicanNames[0]}
+                                            placeholder="Ex: Ana Macuácua"
                                             required
                                         />
                                     </div>
@@ -177,6 +155,9 @@ const Checkout = () => {
                                             placeholder="exemplo@email.com"
                                             required
                                         />
+                                        <small className="form-hint">
+                                            <Mail size={12} /> Receberá os bilhetes aqui
+                                        </small>
                                     </div>
 
                                     <div className="form-group">
@@ -192,27 +173,18 @@ const Checkout = () => {
                                             placeholder="+258 85 635 0220"
                                             required
                                         />
-                                    </div>
-
-                                    <div className="form-group">
-                                        <label htmlFor="nuit">NUIT (Opcional)</label>
-                                        <input
-                                            id="nuit"
-                                            type="text"
-                                            value={customerInfo.nuit}
-                                            onChange={(e) => setCustomerInfo(prev => ({
-                                                ...prev,
-                                                nuit: e.target.value
-                                            }))}
-                                            placeholder="123456789"
-                                        />
+                                        <small className="form-hint">
+                                            <Phone size={12} /> Para contato sobre o evento
+                                        </small>
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Método de Pagamento */}
                             <div className="form-section">
-                                <h2>💳 Método de Pagamento</h2>
+                                <h2>
+                                    <CreditCard size={20} />
+                                    Método de Pagamento
+                                </h2>
 
                                 <div className="payment-methods">
                                     <label className={`payment-method ${paymentMethod === 'mpesa' ? 'selected' : ''}`}>
@@ -224,11 +196,54 @@ const Checkout = () => {
                                             onChange={(e) => setPaymentMethod(e.target.value)}
                                         />
                                         <div className="payment-content">
-                                            <span className="payment-icon">📱</span>
+                                            <span className="payment-icon">
+                                                <Smartphone size={24} />
+                                            </span>
                                             <div className="payment-info">
                                                 <span className="payment-name">M-Pesa</span>
                                                 <span className="payment-desc">Pagamento rápido via móvel</span>
                                             </div>
+                                            {paymentMethod === 'mpesa' && <Check size={20} className="check-icon" />}
+                                        </div>
+                                    </label>
+
+                                    <label className={`payment-method ${paymentMethod === 'paypal' ? 'selected' : ''}`}>
+                                        <input
+                                            type="radio"
+                                            name="payment"
+                                            value="paypal"
+                                            checked={paymentMethod === 'paypal'}
+                                            onChange={(e) => setPaymentMethod(e.target.value)}
+                                        />
+                                        <div className="payment-content">
+                                            <span className="payment-icon">
+                                                <CreditCard size={24} />
+                                            </span>
+                                            <div className="payment-info">
+                                                <span className="payment-name">PayPal</span>
+                                                <span className="payment-desc">Pagamento internacional</span>
+                                            </div>
+                                            {paymentMethod === 'paypal' && <Check size={20} className="check-icon" />}
+                                        </div>
+                                    </label>
+
+                                    <label className={`payment-method ${paymentMethod === 'emola' ? 'selected' : ''}`}>
+                                        <input
+                                            type="radio"
+                                            name="payment"
+                                            value="emola"
+                                            checked={paymentMethod === 'emola'}
+                                            onChange={(e) => setPaymentMethod(e.target.value)}
+                                        />
+                                        <div className="payment-content">
+                                            <span className="payment-icon">
+                                                <Banknote size={24} />
+                                            </span>
+                                            <div className="payment-info">
+                                                <span className="payment-name">Emola</span>
+                                                <span className="payment-desc">Pagamento digital</span>
+                                            </div>
+                                            {paymentMethod === 'emola' && <Check size={20} className="check-icon" />}
                                         </div>
                                     </label>
 
@@ -241,50 +256,75 @@ const Checkout = () => {
                                             onChange={(e) => setPaymentMethod(e.target.value)}
                                         />
                                         <div className="payment-content">
-                                            <span className="payment-icon">💳</span>
+                                            <span className="payment-icon">
+                                                <CreditCard size={24} />
+                                            </span>
                                             <div className="payment-info">
                                                 <span className="payment-name">Cartão de Crédito</span>
                                                 <span className="payment-desc">Visa, Mastercard</span>
                                             </div>
-                                        </div>
-                                    </label>
-
-                                    <label className={`payment-method ${paymentMethod === 'transfer' ? 'selected' : ''}`}>
-                                        <input
-                                            type="radio"
-                                            name="payment"
-                                            value="transfer"
-                                            checked={paymentMethod === 'transfer'}
-                                            onChange={(e) => setPaymentMethod(e.target.value)}
-                                        />
-                                        <div className="payment-content">
-                                            <span className="payment-icon">🏦</span>
-                                            <div className="payment-info">
-                                                <span className="payment-name">Transferência Bancária</span>
-                                                <span className="payment-desc">BCI, Standard Bank</span>
-                                            </div>
+                                            {paymentMethod === 'card' && <Check size={20} className="check-icon" />}
                                         </div>
                                     </label>
                                 </div>
+
+                                {paymentMethod === 'mpesa' && (
+                                    <div className="payment-instructions">
+                                        <p><strong>Instruções M-Pesa:</strong></p>
+                                        <ol>
+                                            <li>Vá ao menu M-Pesa no seu telemóvel</li>
+                                            <li>Selecione "Pagar" ou "Pagar Serviço"</li>
+                                            <li>Digite o código do comerciante: <strong>171717</strong></li>
+                                            <li>Digite o valor: <strong>{total.toLocaleString('pt-MZ')} MT</strong></li>
+                                            <li>Confirme a transação</li>
+                                        </ol>
+                                    </div>
+                                )}
                             </div>
 
-                            {/* Botão de Submissão */}
-                            <button
-                                type="submit"
-                                className="btn btn-primary btn-lg w-full"
-                                disabled={isProcessing}
-                            >
-                                {isProcessing ? 'Processando...' : `Pagar ${total} MT`}
-                            </button>
+                            <div className="form-actions">
+                                <button
+                                    type="button"
+                                    onClick={() => navigate(-1)}
+                                    className="btn btn-secondary"
+                                    disabled={isProcessing}
+                                >
+                                    <ArrowLeft size={16} /> Voltar
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="btn btn-primary btn-lg"
+                                    disabled={isProcessing}
+                                >
+                                    {isProcessing ? 'Processando...' : `Confirmar Pagamento de ${total.toLocaleString('pt-MZ')} MT`}
+                                </button>
+                            </div>
                         </form>
                     </div>
 
-                    {/* Resumo do Pedido */}
                     <div className="order-summary-section">
                         <div className="order-summary">
-                            <h3>📦 Resumo do Pedido</h3>
+                            <h3>
+                                <FileText size={20} />
+                                Resumo do Pedido
+                            </h3>
+
+                            {/* Resumo por tipo de bilhete */}
+                            <div className="ticket-type-summary">
+                                <h4>Seus Bilhetes:</h4>
+                                {Object.entries(cartSummary).map(([type, data]) => (
+                                    <div key={type} className="type-summary-item">
+                                        <span className="type-name">{type.toUpperCase()}</span>
+                                        <div className="type-details">
+                                            <span className="type-quantity">{data.quantity}x</span>
+                                            <span className="type-total">{data.total.toLocaleString('pt-MZ')} MT</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
 
                             <div className="order-items">
+                                <h4>Detalhes:</h4>
                                 {cart.map(item => (
                                     <div key={item.id} className="order-item">
                                         <div className="item-image">
@@ -292,9 +332,9 @@ const Checkout = () => {
                                         </div>
 
                                         <div className="item-details">
-                                            <h4>{item.eventName}</h4>
-                                            <p>{item.type.toUpperCase()} - {item.phase}</p>
-                                            <div className="item-price">{item.price} MT cada</div>
+                                            <h5>{item.eventName}</h5>
+                                            <p className="item-type">{item.type.toUpperCase()} - {item.phase}</p>
+                                            <div className="item-price">{item.price.toLocaleString('pt-MZ')} MT cada</div>
                                         </div>
 
                                         <div className="item-controls">
@@ -302,27 +342,30 @@ const Checkout = () => {
                                                 <button
                                                     onClick={() => handleQuantityChange(item.id, -1)}
                                                     className="quantity-btn"
+                                                    type="button"
                                                 >
-                                                    -
+                                                    <Minus size={16} />
                                                 </button>
                                                 <span className="quantity">{item.quantity}</span>
                                                 <button
                                                     onClick={() => handleQuantityChange(item.id, 1)}
                                                     className="quantity-btn"
+                                                    type="button"
                                                 >
-                                                    +
+                                                    <Plus size={16} />
                                                 </button>
                                             </div>
                                             <button
                                                 onClick={() => removeFromCart(item.id)}
                                                 className="remove-btn"
+                                                type="button"
                                             >
-                                                🗑️
+                                                <Trash2 size={16} />
                                             </button>
                                         </div>
 
                                         <div className="item-total">
-                                            {item.price * item.quantity} MT
+                                            {(item.price * item.quantity).toLocaleString('pt-MZ')} MT
                                         </div>
                                     </div>
                                 ))}
@@ -331,25 +374,29 @@ const Checkout = () => {
                             <div className="order-totals">
                                 <div className="total-line">
                                     <span>Subtotal:</span>
-                                    <span>{total} MT</span>
+                                    <span>{total.toLocaleString('pt-MZ')} MT</span>
                                 </div>
                                 <div className="total-line">
                                     <span>Taxa de serviço:</span>
                                     <span>0 MT</span>
                                 </div>
                                 <div className="total-line grand-total">
-                                    <span>Total:</span>
-                                    <span>{total} MT</span>
+                                    <span>Total a pagar:</span>
+                                    <span className="grand-total-amount">{total.toLocaleString('pt-MZ')} MT</span>
                                 </div>
                             </div>
 
                             <div className="security-badges">
                                 <div className="security-badge">
-                                    <span>🔒</span>
+                                    <Shield size={16} />
                                     <span>Pagamento Seguro</span>
                                 </div>
                                 <div className="security-badge">
-                                    <span>⚡</span>
+                                    <Ticket size={16} />
+                                    <span>QR Code Único</span>
+                                </div>
+                                <div className="security-badge">
+                                    <Zap size={16} />
                                     <span>Entrega Imediata</span>
                                 </div>
                             </div>

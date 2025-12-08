@@ -4,6 +4,7 @@
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
+    background: var(--bg-primary);
 }
 
 .home-page.loaded {
@@ -13,17 +14,15 @@
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(135deg,
-            var(--primary-dark) 0%,
-            var(--primary) 30%,
-            var(--secondary) 100%);
-    color: white;
+    background: var(--bg-card);
+    color: var(--text-primary);
     padding: var(--spacing-16) 0;
     position: relative;
     overflow: hidden;
     min-height: 90vh;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .hero-background {
@@ -37,7 +36,7 @@
 
 .particle {
     position: absolute;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--primary-alpha);
     border-radius: 50%;
     animation: float 15s infinite linear;
 }
@@ -100,6 +99,7 @@
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: var(--spacing-6);
+    color: var(--text-primary);
 }
 
 .title-line {
@@ -107,17 +107,14 @@
 }
 
 .highlight {
-    background: linear-gradient(135deg, var(--secondary), #ff6b00);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary);
 }
 
 .hero-subtitle {
     font-size: clamp(1.125rem, 2vw, 1.5rem);
     line-height: 1.6;
     margin-bottom: var(--spacing-8);
-    opacity: 0.9;
+    color: var(--text-secondary);
     max-width: 500px;
     animation: slideInLeft 0.8s ease-out 0.2s both;
 }
@@ -148,8 +145,9 @@
 }
 
 .ticket-card {
-    background: white;
-    color: var(--gray-900);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-6);
     max-width: 400px;
@@ -180,10 +178,10 @@
     display: flex;
     justify-content: space-between;
     font-size: var(--font-size-sm);
-    color: var(--gray-600);
+    color: var(--text-secondary);
     margin-bottom: var(--spacing-4);
     padding-bottom: var(--spacing-2);
-    border-bottom: 2px dotted var(--gray-200);
+    border-bottom: 2px dotted var(--border-color);
 }
 
 .ticket-main {
@@ -207,7 +205,7 @@
 
 .price-from {
     font-size: var(--font-size-sm);
-    color: var(--gray-600);
+    color: var(--text-secondary);
 }
 
 .price-value {
@@ -221,7 +219,7 @@
     justify-content: space-between;
     align-items: center;
     padding-top: var(--spacing-4);
-    border-top: 2px dotted var(--gray-200);
+    border-top: 2px dotted var(--border-color);
 }
 
 .ticket-availability {
@@ -229,6 +227,7 @@
     align-items: center;
     gap: var(--spacing-2);
     font-size: var(--font-size-sm);
+    color: var(--text-secondary);
 }
 
 .availability-dot {
@@ -254,7 +253,7 @@
 /* Platform Features */
 .platform-features {
     padding: var(--spacing-16) 0;
-    background: var(--gray-50);
+    background: var(--bg-primary);
 }
 
 .section-header {
@@ -264,13 +263,13 @@
 
 .section-header h2 {
     font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--gray-900);
+    color: var(--text-primary);
     margin-bottom: var(--spacing-2);
 }
 
 .section-header p {
     font-size: clamp(1rem, 2vw, 1.25rem);
-    color: var(--gray-600);
+    color: var(--text-secondary);
 }
 
 .features-grid {
@@ -282,17 +281,17 @@
 }
 
 .feature-card {
-    background: white;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     padding: var(--spacing-6);
     border-radius: var(--border-radius-lg);
     text-align: center;
     transition: all 0.3s ease;
-    border: 1px solid transparent;
 }
 
 .feature-card:hover {
     transform: translateY(-8px);
-    border-color: var(--primary-light);
+    border-color: var(--primary);
     box-shadow: var(--shadow-lg);
 }
 
@@ -311,28 +310,31 @@
 .feature-icon svg {
     width: 32px;
     height: 32px;
+    stroke-width: 2;
 }
 
 .feature-card h3 {
     font-size: var(--font-size-lg);
-    color: var(--gray-900);
+    color: var(--text-primary);
     margin-bottom: var(--spacing-2);
 }
 
 .feature-card p {
-    color: var(--gray-600);
+    color: var(--text-secondary);
     line-height: 1.5;
 }
 
 /* Featured Events */
 .featured-section {
     padding: var(--spacing-16) 0;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
 }
 
 .empty-events {
     text-align: center;
     padding: var(--spacing-12);
-    color: var(--gray-500);
+    color: var(--text-muted);
 }
 
 .empty-events svg {
@@ -340,11 +342,17 @@
     height: 64px;
     margin-bottom: var(--spacing-4);
     opacity: 0.5;
+    stroke: currentColor;
 }
 
 .empty-events h3 {
     font-size: var(--font-size-xl);
     margin-bottom: var(--spacing-2);
+    color: var(--text-secondary);
+}
+
+.empty-events p {
+    color: var(--text-muted);
 }
 
 .view-all-wrapper {
@@ -354,10 +362,11 @@
 
 /* Final CTA */
 .final-cta {
-    background: linear-gradient(135deg, var(--gray-900), var(--black));
-    color: white;
+    background: var(--bg-primary);
+    color: var(--text-primary);
     padding: var(--spacing-16) 0;
     text-align: center;
+    border-top: 1px solid var(--border-color);
 }
 
 .cta-content {
@@ -368,21 +377,13 @@
 .cta-content h2 {
     font-size: clamp(2rem, 4vw, 3rem);
     margin-bottom: var(--spacing-4);
+    color: var(--text-primary);
 }
 
 .cta-content p {
     font-size: clamp(1rem, 2vw, 1.25rem);
-    opacity: 0.9;
+    color: var(--text-secondary);
     margin-bottom: var(--spacing-8);
-}
-
-.btn-white {
-    background: white;
-    color: var(--gray-900);
-}
-
-.btn-white:hover {
-    background: var(--gray-100);
 }
 
 /* Animations */
