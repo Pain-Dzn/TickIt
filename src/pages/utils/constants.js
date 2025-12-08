@@ -1,4 +1,4 @@
-export const APP_NAME = 'Tabater'
+export const APP_NAME = 'TickIt'
 export const APP_DESCRIPTION = 'Sistema de venda de bilhetes para eventos em Moçambique'
 
 export const PAYMENT_METHODS = {

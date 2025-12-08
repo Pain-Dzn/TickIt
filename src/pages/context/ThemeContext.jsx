@@ -15,7 +15,7 @@ export const ThemeProvider = ({ children }) => {
 
     // Carregar tema do localStorage ou preferência do sistema
     useEffect(() => {
-        const savedTheme = localStorage.getItem('tabater-theme')
+        const savedTheme = localStorage.getItem('tickit-theme')
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
 
         if (savedTheme) {
