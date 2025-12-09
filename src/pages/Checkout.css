@@ -724,6 +724,19 @@
     color: #1e293b;
 }
 
+/* Empty cart state no dark mode */
+[data-theme="dark"] .empty-cart h2 {
+    color: white;
+}
+
+[data-theme="dark"] .empty-cart p {
+    color: rgba(226, 232, 240, 0.9);
+}
+
+[data-theme="dark"] .empty-icon {
+    color: rgba(148, 163, 184, 0.5);
+}
+
 /* ============================================
    RESPONSIVIDADE
    ============================================ */
