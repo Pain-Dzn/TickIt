@@ -34,9 +34,6 @@ const Gallery = ({ language = 'pt' }) => {
             listView: 'Vista em Lista',
             noEventsFound: 'Nenhum evento encontrado',
             eventDetails: 'Detalhes do Evento',
-            date: 'Data',
-            location: 'Local',
-            artist: 'Artista',
             viewPhotos: 'Ver Fotos',
             backToList: 'Voltar à lista',
             adjustSearch: 'Tente ajustar a sua pesquisa ou filtros'
