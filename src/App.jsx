@@ -4,6 +4,7 @@ import { EventsProvider } from './pages/context/EventsContext'
 import { CartProvider } from './pages/context/CartContext'
 import { ThemeProvider } from './pages/context/ThemeContext'
 
+import ScrollToTop from './components/ScrollToTop'
 import Header from './components/Layout/Header'
 import Footer from './components/Layout/Footer'
 import Home from './pages/Home'
@@ -31,6 +32,7 @@ function App() {
       <EventsProvider>
         <CartProvider>
           <Router>
+            <ScrollToTop />
             <div className="app">
               <Header />
               <main className="main-content">
