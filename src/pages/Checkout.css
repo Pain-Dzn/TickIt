@@ -222,6 +222,34 @@
     flex-shrink: 0;
 }
 
+/* Inputs de detalhes de pagamento */
+.payment-details-input {
+    margin-top: var(--spacing-4);
+    padding: var(--spacing-4);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    animation: slideDown 0.3s ease;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-4);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Instruções de pagamento */
 .payment-instructions {
     margin-top: var(--spacing-4);
@@ -234,6 +262,7 @@
 .payment-instructions p {
     margin-bottom: var(--spacing-2);
     color: var(--text-primary);
+    font-weight: 600;
 }
 
 .payment-instructions ol {
@@ -243,6 +272,7 @@
 
 .payment-instructions li {
     margin-bottom: var(--spacing-2);
+    color: var(--text-secondary);
 }
 
 .payment-instructions strong {
@@ -321,8 +351,8 @@
 }
 
 .type-quantity {
-    background: var(--primary-light);
-    color: var(--primary-dark);
+    background: var(--primary);
+    color: white;
     padding: var(--spacing-1) var(--spacing-2);
     border-radius: 4px;
     font-size: var(--font-size-sm);
@@ -577,7 +607,7 @@
 }
 
 /* ============================================
-   TEMA ESCURO
+   TEMA ESCURO - MELHORIAS DE CONTRASTE
    ============================================ */
 
 [data-theme="dark"] .form-group input::placeholder,
@@ -586,13 +616,112 @@
     opacity: 0.6;
 }
 
+[data-theme="dark"] .payment-method {
+    background: rgba(30, 41, 59, 0.5);
+}
+
+[data-theme="dark"] .payment-method:hover {
+    background: rgba(51, 65, 85, 0.7);
+}
+
 [data-theme="dark"] .payment-method.selected {
     background: rgba(66, 153, 225, 0.15);
+    border-color: var(--primary);
+}
+
+[data-theme="dark"] .payment-icon {
+    background: rgba(66, 153, 225, 0.2);
+    color: var(--primary);
+}
+
+[data-theme="dark"] .payment-name {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .payment-desc {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .payment-details-input {
+    background: rgba(30, 41, 59, 0.5);
+}
+
+[data-theme="dark"] .payment-instructions {
+    background: rgba(30, 41, 59, 0.5);
+}
+
+[data-theme="dark"] .payment-instructions p,
+[data-theme="dark"] .payment-instructions li {
+    color: var(--text-secondary);
 }
 
 [data-theme="dark"] .type-quantity {
-    background: var(--primary-dark);
-    color: var(--primary-light);
+    background: var(--primary);
+    color: white;
+}
+
+[data-theme="dark"] .order-item {
+    background: rgba(30, 41, 59, 0.5);
+}
+
+[data-theme="dark"] .ticket-type-summary {
+    background: rgba(30, 41, 59, 0.5);
+}
+
+[data-theme="dark"] .security-badge {
+    background: rgba(30, 41, 59, 0.5);
+}
+
+/* Títulos e textos importantes em branco/azul no dark mode */
+[data-theme="dark"] .form-section h2 {
+    color: white;
+}
+
+[data-theme="dark"] .form-section h2 svg {
+    color: var(--primary);
+}
+
+[data-theme="dark"] .order-summary h3 {
+    color: white;
+}
+
+[data-theme="dark"] .order-summary h3 svg {
+    color: var(--primary);
+}
+
+[data-theme="dark"] .item-type {
+    color: rgba(148, 163, 184, 0.9);
+}
+
+[data-theme="dark"] .item-total {
+    color: white;
+}
+
+[data-theme="dark"] .security-badge {
+    color: rgba(226, 232, 240, 0.9);
+}
+
+[data-theme="dark"] .security-badge svg {
+    color: var(--primary);
+}
+
+/* Quantity controls em preto no dark mode */
+[data-theme="dark"] .quantity-controls {
+    background: white;
+}
+
+[data-theme="dark"] .quantity-btn {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+[data-theme="dark"] .quantity-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+[data-theme="dark"] .quantity {
+    color: #1e293b;
 }
 
 /* ============================================
@@ -648,6 +777,10 @@
     .security-badges {
         flex-direction: column;
         gap: var(--spacing-2);
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
     }
 }
 

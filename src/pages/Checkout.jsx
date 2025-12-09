@@ -23,6 +23,16 @@ const Checkout = () => {
     const [paymentMethod, setPaymentMethod] = useState('mpesa')
     const [isProcessing, setIsProcessing] = useState(false)
 
+    const [paymentDetails, setPaymentDetails] = useState({
+        mpesaNumber: '',
+        paypalEmail: '',
+        emolaNumber: '',
+        cardNumber: '',
+        cardName: '',
+        cardExpiry: '',
+        cardCVV: ''
+    })
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setIsProcessing(true)
@@ -43,6 +53,34 @@ const Checkout = () => {
             alert('Por favor, insira seu número de WhatsApp.')
             setIsProcessing(false)
             return
+        }
+
+        // Validação dos detalhes de pagamento
+        if (paymentMethod === 'mpesa' && !paymentDetails.mpesaNumber.trim()) {
+            alert('Por favor, insira o número M-Pesa.')
+            setIsProcessing(false)
+            return
+        }
+
+        if (paymentMethod === 'paypal' && !paymentDetails.paypalEmail.trim()) {
+            alert('Por favor, insira o email PayPal.')
+            setIsProcessing(false)
+            return
+        }
+
+        if (paymentMethod === 'emola' && !paymentDetails.emolaNumber.trim()) {
+            alert('Por favor, insira o número Emola.')
+            setIsProcessing(false)
+            return
+        }
+
+        if (paymentMethod === 'card') {
+            if (!paymentDetails.cardNumber.trim() || !paymentDetails.cardName.trim() ||
+                !paymentDetails.cardExpiry.trim() || !paymentDetails.cardCVV.trim()) {
+                alert('Por favor, preencha todos os dados do cartão.')
+                setIsProcessing(false)
+                return
+            }
         }
 
         try {
@@ -187,6 +225,7 @@ const Checkout = () => {
                                 </h2>
 
                                 <div className="payment-methods">
+                                    {/* M-PESA */}
                                     <label className={`payment-method ${paymentMethod === 'mpesa' ? 'selected' : ''}`}>
                                         <input
                                             type="radio"
@@ -207,6 +246,34 @@ const Checkout = () => {
                                         </div>
                                     </label>
 
+                                    {paymentMethod === 'mpesa' && (
+                                        <div className="payment-details-input">
+                                            <div className="form-group">
+                                                <label htmlFor="mpesaNumber">Número M-Pesa *</label>
+                                                <input
+                                                    id="mpesaNumber"
+                                                    type="tel"
+                                                    value={paymentDetails.mpesaNumber}
+                                                    onChange={(e) => setPaymentDetails(prev => ({
+                                                        ...prev,
+                                                        mpesaNumber: e.target.value
+                                                    }))}
+                                                    placeholder="+258 84 000 0000"
+                                                    required
+                                                />
+                                                <small className="form-hint">
+                                                    Digite o número que usará para fazer o pagamento
+                                                </small>
+                                            </div>
+                                            <div className="payment-instructions">
+                                                <ol>
+
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* PAYPAL */}
                                     <label className={`payment-method ${paymentMethod === 'paypal' ? 'selected' : ''}`}>
                                         <input
                                             type="radio"
@@ -227,6 +294,38 @@ const Checkout = () => {
                                         </div>
                                     </label>
 
+                                    {paymentMethod === 'paypal' && (
+                                        <div className="payment-details-input">
+                                            <div className="form-group">
+                                                <label htmlFor="paypalEmail">Email PayPal *</label>
+                                                <input
+                                                    id="paypalEmail"
+                                                    type="email"
+                                                    value={paymentDetails.paypalEmail}
+                                                    onChange={(e) => setPaymentDetails(prev => ({
+                                                        ...prev,
+                                                        paypalEmail: e.target.value
+                                                    }))}
+                                                    placeholder="seuemail@paypal.com"
+                                                    required
+                                                />
+                                                <small className="form-hint">
+                                                    Email associado à sua conta PayPal
+                                                </small>
+                                            </div>
+                                            <div className="payment-instructions">
+                                                <p><strong>Instruções PayPal:</strong></p>
+                                                <ol>
+                                                    <li>Será redirecionado para o PayPal</li>
+                                                    <li>Faça login na sua conta</li>
+                                                    <li>Confirme o pagamento de <strong>${(total / 63).toFixed(2)} USD</strong></li>
+                                                    <li>Aguarde a confirmação</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* EMOLA */}
                                     <label className={`payment-method ${paymentMethod === 'emola' ? 'selected' : ''}`}>
                                         <input
                                             type="radio"
@@ -247,6 +346,34 @@ const Checkout = () => {
                                         </div>
                                     </label>
 
+                                    {paymentMethod === 'emola' && (
+                                        <div className="payment-details-input">
+                                            <div className="form-group">
+                                                <label htmlFor="emolaNumber">Número Emola *</label>
+                                                <input
+                                                    id="emolaNumber"
+                                                    type="tel"
+                                                    value={paymentDetails.emolaNumber}
+                                                    onChange={(e) => setPaymentDetails(prev => ({
+                                                        ...prev,
+                                                        emolaNumber: e.target.value
+                                                    }))}
+                                                    placeholder="+258 82 000 0000"
+                                                    required
+                                                />
+                                                <small className="form-hint">
+                                                    Digite o número registado no Emola
+                                                </small>
+                                            </div>
+                                            <div className="payment-instructions">
+                                                <ol>
+
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* CARTÃO */}
                                     <label className={`payment-method ${paymentMethod === 'card' ? 'selected' : ''}`}>
                                         <input
                                             type="radio"
@@ -266,20 +393,73 @@ const Checkout = () => {
                                             {paymentMethod === 'card' && <Check size={20} className="check-icon" />}
                                         </div>
                                     </label>
-                                </div>
 
-                                {paymentMethod === 'mpesa' && (
-                                    <div className="payment-instructions">
-                                        <p><strong>Instruções M-Pesa:</strong></p>
-                                        <ol>
-                                            <li>Vá ao menu M-Pesa no seu telemóvel</li>
-                                            <li>Selecione "Pagar" ou "Pagar Serviço"</li>
-                                            <li>Digite o código do comerciante: <strong>171717</strong></li>
-                                            <li>Digite o valor: <strong>{total.toLocaleString('pt-MZ')} MT</strong></li>
-                                            <li>Confirme a transação</li>
-                                        </ol>
-                                    </div>
-                                )}
+                                    {paymentMethod === 'card' && (
+                                        <div className="payment-details-input">
+                                            <div className="form-group">
+                                                <label htmlFor="cardNumber">Número do Cartão *</label>
+                                                <input
+                                                    id="cardNumber"
+                                                    type="text"
+                                                    value={paymentDetails.cardNumber}
+                                                    onChange={(e) => setPaymentDetails(prev => ({
+                                                        ...prev,
+                                                        cardNumber: e.target.value
+                                                    }))}
+                                                    placeholder="1234 5678 9012 3456"
+                                                    maxLength="19"
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="cardName">Nome no Cartão *</label>
+                                                <input
+                                                    id="cardName"
+                                                    type="text"
+                                                    value={paymentDetails.cardName}
+                                                    onChange={(e) => setPaymentDetails(prev => ({
+                                                        ...prev,
+                                                        cardName: e.target.value
+                                                    }))}
+                                                    placeholder="NOME COMO APARECE NO CARTÃO"
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="form-row">
+                                                <div className="form-group">
+                                                    <label htmlFor="cardExpiry">Validade *</label>
+                                                    <input
+                                                        id="cardExpiry"
+                                                        type="text"
+                                                        value={paymentDetails.cardExpiry}
+                                                        onChange={(e) => setPaymentDetails(prev => ({
+                                                            ...prev,
+                                                            cardExpiry: e.target.value
+                                                        }))}
+                                                        placeholder="MM/AA"
+                                                        maxLength="5"
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label htmlFor="cardCVV">CVV *</label>
+                                                    <input
+                                                        id="cardCVV"
+                                                        type="text"
+                                                        value={paymentDetails.cardCVV}
+                                                        onChange={(e) => setPaymentDetails(prev => ({
+                                                            ...prev,
+                                                            cardCVV: e.target.value
+                                                        }))}
+                                                        placeholder="123"
+                                                        maxLength="4"
+                                                        required
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             <div className="form-actions">
