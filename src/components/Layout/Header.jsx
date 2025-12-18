@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTheme } from '../../pages/context/ThemeContext'
 import { Menu, X, Moon, Sun } from 'lucide-react'
+import logo from './Tickit.png';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -23,7 +24,7 @@ const Header = () => {
                 <div className="header-content">
                     {/* Logo */}
                     <Link to="/" className="logo">
-                        <span className="logo-text">TickIt</span>
+                        <span className="logo-text"><img id='logo-image' src={logo} alt="" /></span>
                     </Link>
 
                     {/* Navegação Desktop */}

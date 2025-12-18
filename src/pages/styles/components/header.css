@@ -314,3 +314,7 @@
         font-size: var(--font-size-lg);
     }
 }
+
+#logo-image {
+    width: 100px !important;
+}
