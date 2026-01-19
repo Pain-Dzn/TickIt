@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { EventsProvider } from './public/pages/context/EventsContext'
 import { CartProvider } from './public/pages/context/CartContext'
 import { ThemeProvider } from './public/pages/context/ThemeContext'
-
+//Sim
 import ScrollToTop from './public/components/ScrollToTop'
 import Header from './public/components/Layout/Header'
 import Footer from './public/components/Layout/Footer'
